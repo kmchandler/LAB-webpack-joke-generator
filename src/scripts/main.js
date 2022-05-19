@@ -2,13 +2,23 @@
 
 import 'bootstrap'; // import bootstrap elements and js
 import '../styles/main.scss';
-import jokeData from '../api/jokeData';
+import getJoke from '../api/jokeData';
 
-const init = () => {
-  document.querySelector('#app').innerHTML = `
-  `;
+const initialButton = `
+<button id='initialBtn' type='click'>GET A JOKE</button>`;
 
-  jokeData().then(console.warn);
+const renderToDom = (divId, textToRender) => {
+  const selectedElement = document.querySelector(divId);
+  selectedElement.innerHTML = textToRender;
 };
 
-init();
+const eventListeners = () => {
+  document.querySelector('#app').addEventListener('click', getJoke());
+};
+
+const startApp = () => {
+  renderToDom('#app', initialButton);
+  eventListeners();
+};
+
+startApp();
